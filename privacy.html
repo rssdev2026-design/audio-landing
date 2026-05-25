@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  AURIO — Politique de confidentialité (RGPD)
+  ============================================================
+  À COMPLÉTER avant mise en ligne (cherche les [CROCHETS]) :
+   - [RAISON SOCIALE / NOM]  : ton nom ou ta société (responsable de traitement)
+   - [STATUT / SIREN]        : ex. "auto-entrepreneur, SIREN 000 000 000" (si applicable)
+   - [ADRESSE]               : adresse postale du responsable (obligatoire si société)
+   - [EMAIL CONTACT]         : adresse de contact pour les demandes RGPD
+   - [ESP]                   : ton outil d'emailing réellement utilisé (Formspree, Brevo, Kit...)
+   - [HÉBERGEUR]             : Netlify / Vercel / Cloudflare Pages / GitHub Pages
+  Mets ce fichier à côté de index.html ; il est déjà lié depuis la page.
+  ============================================================
+-->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AURIO — Politique de confidentialité</title>
+<meta name="description" content="Politique de confidentialité d'AURIO : quelles données sont collectées via la liste d'attente, pourquoi, et tes droits (RGPD).">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0B0C; --surface:#15140F; --surface-2:#1b1910;
+    --gold:#D4AF37; --gold-light:#EBCB6B; --gold-deep:#A8852B;
+    --cream:#F4EFE2; --muted:#B7B0A0; --hint:#807A6C;
+    --border:rgba(212,175,55,.22); --border-strong:rgba(212,175,55,.7);
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+    --maxw:780px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--cream);font-family:var(--sans);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  a{color:var(--gold-light);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  header{padding:24px 0;border-bottom:1px solid var(--border)}
+  .nav{display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--serif);font-size:24px;letter-spacing:.32em;color:var(--gold-light);font-weight:500}
+  .back{font-size:13px;color:var(--muted)}
+
+  .head{padding:40px 0 8px;text-align:center}
+  .head h1{font-family:var(--serif);font-weight:500;font-size:clamp(30px,6vw,46px);color:var(--cream);letter-spacing:.01em}
+  .head .upd{color:var(--hint);font-size:12.5px;letter-spacing:.06em;margin-top:10px}
+
+  .doc{padding:18px 0 60px}
+  .doc .intro{color:var(--muted);font-size:15px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:18px 0 30px}
+  .doc h2{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--gold-light);margin:34px 0 10px;letter-spacing:.01em}
+  .doc h2 .n{color:var(--gold-deep);margin-right:10px;font-family:var(--sans);font-size:14px;font-weight:600;vertical-align:middle}
+  .doc p{color:#E2DCCD;margin:8px 0}
+  .doc ul{list-style:none;margin:10px 0 10px;display:flex;flex-direction:column;gap:8px}
+  .doc li{position:relative;padding-left:20px;color:#E2DCCD;font-size:15px}
+  .doc li::before{content:"";position:absolute;left:2px;top:10px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  .doc .fill{color:var(--gold-light);font-weight:500}
+  .doc strong{color:var(--cream);font-weight:600}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+  th,td{text-align:left;padding:11px 12px;border:1px solid var(--border);vertical-align:top;color:#E2DCCD}
+  th{background:var(--surface-2);color:var(--gold-light);font-weight:600}
+
+  footer{border-top:1px solid var(--border);padding:26px 0 50px;text-align:center}
+  footer p{color:var(--hint);font-size:12.5px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <span class="brand">AURIO</span>
+    <a class="back" href="index.html">← Retour</a>
+  </div>
+</header>
+
+<main class="wrap doc">
+
+  <div class="head">
+    <h1>Politique de confidentialité</h1>
+    <p class="upd">Dernière mise à jour : 25 mai 2026</p>
+  </div>
+
+  <p class="intro">
+    AURIO prépare une plateforme d'écoute de musique 100&nbsp;% générée par intelligence artificielle.
+    Cette page explique quelles données nous collectons via notre <strong>liste d'attente</strong>, pourquoi,
+    pendant combien de temps, avec qui elles sont partagées, et comment exercer tes droits conformément au
+    Règlement général sur la protection des données (RGPD, UE 2016/679).
+  </p>
+
+  <h2><span class="n">1</span>Responsable du traitement</h2>
+  <p>
+    Le responsable du traitement est <span class="fill">[RAISON SOCIALE / NOM]</span>
+    <span class="fill">[STATUT / SIREN]</span>, <span class="fill">[ADRESSE]</span>.
+  </p>
+  <p>
+    Pour toute question relative à tes données ou à cette politique :
+    <a href="mailto:[EMAIL CONTACT]"><span class="fill">[EMAIL CONTACT]</span></a>.
+  </p>
+
+  <h2><span class="n">2</span>Données que nous collectons</h2>
+  <p>Lorsque tu rejoins la liste d'attente AURIO, nous collectons uniquement&nbsp;:</p>
+  <ul>
+    <li><strong>Adresse e-mail</strong> (obligatoire) — pour t'informer du lancement et t'envoyer les actualités.</li>
+    <li><strong>Prénom</strong> (facultatif) — pour personnaliser nos messages.</li>
+    <li><strong>Code de parrainage</strong> et nombre de filleuls — pour gérer le programme de parrainage et les avantages Fondateur.</li>
+    <li><strong>Preuve de consentement</strong> — date et heure d'inscription, case cochée.</li>
+    <li><strong>Données techniques</strong> — adresse IP et journaux de connexion susceptibles d'être enregistrés par notre hébergeur et notre outil d'emailing à des fins de sécurité et de prévention des abus.</li>
+  </ul>
+  <p>Nous ne collectons <strong>aucune donnée sensible</strong> et ne procédons à aucun profilage ni décision automatisée.</p>
+
+  <h2><span class="n">3</span>Finalités et base légale</h2>
+  <table>
+    <tr><th>Finalité</th><th>Base légale (RGPD)</th></tr>
+    <tr><td>Gestion de la liste d'attente et information sur le lancement</td><td>Ton <strong>consentement</strong> (art. 6.1.a)</td></tr>
+    <tr><td>Envoi d'actualités et de communications marketing AURIO</td><td>Ton <strong>consentement</strong> (art. 6.1.a)</td></tr>
+    <tr><td>Programme de parrainage et attribution des avantages Fondateur</td><td>Consentement / exécution du service demandé</td></tr>
+    <tr><td>Sécurité, prévention de la fraude et des inscriptions abusives</td><td><strong>Intérêt légitime</strong> (art. 6.1.f)</td></tr>
+  </table>
+  <p>Tu peux retirer ton consentement à tout moment, sans que cela remette en cause la licéité des traitements effectués avant ce retrait.</p>
+
+  <h2><span class="n">4</span>Destinataires et sous-traitants</h2>
+  <p>Tes données ne sont jamais vendues. Elles sont traitées par des prestataires (sous-traitants au sens du RGPD) agissant pour notre compte&nbsp;:</p>
+  <ul>
+    <li><strong>Outil d'emailing / formulaire</strong> : <span class="fill">[ESP]</span> (ex. Formspree, Brevo, Kit) — collecte et envoi des e-mails.</li>
+    <li><strong>Hébergeur du site</strong> : <span class="fill">[HÉBERGEUR]</span> (ex. Netlify, Vercel, Cloudflare Pages).</li>
+  </ul>
+  <p>
+    <strong>Transferts hors Union européenne</strong> : certains prestataires (notamment américains) peuvent héberger des
+    données en dehors de l'UE. Dans ce cas, les transferts sont encadrés par des garanties appropriées —
+    clauses contractuelles types de la Commission européenne (CCT) et/ou adhésion au
+    <em>EU–U.S. Data Privacy Framework</em>.
+  </p>
+
+  <h2><span class="n">5</span>Durée de conservation</h2>
+  <p>
+    Tes données sont conservées jusqu'au lancement de la plateforme puis pendant la durée de notre relation,
+    et au maximum <strong>3 ans à compter de ton dernier contact</strong> avec nous (clic, ouverture, inscription),
+    conformément aux recommandations de la CNIL en matière de prospection. Tu peux demander leur suppression à tout moment.
+  </p>
+
+  <h2><span class="n">6</span>Tes droits</h2>
+  <p>Conformément au RGPD, tu disposes des droits suivants sur tes données&nbsp;:</p>
+  <ul>
+    <li>Droit d'<strong>accès</strong> et de copie de tes données ;</li>
+    <li>Droit de <strong>rectification</strong> des données inexactes ;</li>
+    <li>Droit à l'<strong>effacement</strong> (« droit à l'oubli ») ;</li>
+    <li>Droit à la <strong>limitation</strong> du traitement ;</li>
+    <li>Droit à la <strong>portabilité</strong> de tes données ;</li>
+    <li>Droit d'<strong>opposition</strong> au traitement ;</li>
+    <li>Droit de <strong>retirer ton consentement</strong> à tout moment ;</li>
+    <li>Droit de définir des <strong>directives</strong> sur le sort de tes données après ton décès.</li>
+  </ul>
+  <p>
+    Pour exercer ces droits, écris-nous à
+    <a href="mailto:[EMAIL CONTACT]"><span class="fill">[EMAIL CONTACT]</span></a>.
+    Nous répondons dans un délai d'un mois.
+  </p>
+
+  <h2><span class="n">7</span>Désinscription</h2>
+  <p>
+    Chaque e-mail que nous envoyons contient un <strong>lien de désinscription</strong> en un clic.
+    Tu peux aussi nous demander à tout moment de te retirer de la liste : tes données seront alors supprimées.
+  </p>
+
+  <h2><span class="n">8</span>Cookies et stockage local</h2>
+  <p>
+    Le site n'utilise <strong>aucun cookie publicitaire ni traceur tiers</strong>. Nous utilisons uniquement le
+    <em>stockage local</em> (localStorage) de ton navigateur pour conserver ton code de parrainage et l'état
+    de ton inscription sur cet appareil. Ce stockage est strictement nécessaire au fonctionnement du service de
+    parrainage et n'est partagé avec personne. Tu peux l'effacer à tout moment via les paramètres de ton navigateur.
+  </p>
+
+  <h2><span class="n">9</span>Sécurité</h2>
+  <p>
+    Nous mettons en œuvre des mesures techniques et organisationnelles raisonnables pour protéger tes données
+    (connexions chiffrées HTTPS, accès restreint, prestataires conformes au RGPD). Aucun système n'étant
+    infaillible, nous ne pouvons garantir une sécurité absolue.
+  </p>
+
+  <h2><span class="n">10</span>Réclamation</h2>
+  <p>
+    Si tu estimes que tes droits ne sont pas respectés, tu peux introduire une réclamation auprès de la
+    <strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés),
+    <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>,
+    3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07.
+  </p>
+
+  <h2><span class="n">11</span>Modifications</h2>
+  <p>
+    Cette politique peut être mise à jour pour refléter des évolutions légales ou techniques. La date de dernière
+    mise à jour figure en haut de cette page. En cas de changement important, nous t'en informerons par e-mail.
+  </p>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b style="color:var(--muted)">AURIO</b> · Musique 100&nbsp;% générée par IA · © 2026 AURIO. — <a href="index.html">Retour à l'accueil</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

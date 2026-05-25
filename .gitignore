@@ -1,0 +1,7 @@
+# Docs internes & stratégie — ne pas publier
+*.md
+*.docx
+*.pptx
+*.xlsx
+*.pdf
+.DS_Store

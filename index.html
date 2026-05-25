@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  AURIO — Landing page liste d'attente (placeholder de marque)
+  ============================================================
+  CONFIGURATION (2 minutes) :
+  1) Crée un formulaire sur https://formspree.io  → copie son ID (ex: "xpzgkabc")
+  2) Plus bas dans <script>, remplace CONFIG.formspreeId par ton ID.
+     (Tant que c'est "REPLACE_ME", la page tourne en mode démo : succès simulé, aucun e-mail envoyé.)
+  3) Brevo : voir le commentaire "OPTION BREVO" dans le <script>.
+  4) Héberge le fichier (Netlify / Vercel / GitHub Pages / Cloudflare Pages) et mets l'URL dans ta bio.
+  ============================================================
+-->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AURIO — La musique d'une nouvelle ère, générée par IA</title>
+<meta name="description" content="AURIO : la première plateforme d'écoute de musique 100% générée par IA. Rejoins les Fondateurs sur la liste d'attente — avantages à vie.">
+<meta property="og:title" content="AURIO — La musique en or, générée par IA">
+<meta property="og:description" content="100% IA, 0% major. Rejoins les Fondateurs et débloque des avantages à vie.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0B0C; --surface:#15140F; --surface-2:#1b1910;
+    --gold:#D4AF37; --gold-light:#EBCB6B; --gold-deep:#A8852B;
+    --cream:#F4EFE2; --muted:#B7B0A0; --hint:#807A6C;
+    --border:rgba(212,175,55,.22); --border-strong:rgba(212,175,55,.7);
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--cream);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  a{color:var(--gold-light);text-decoration:none}
+
+  header{padding:24px 0}
+  .nav{display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--serif);font-size:24px;letter-spacing:.32em;color:var(--gold-light);font-weight:500}
+  .pill{font-size:11px;letter-spacing:.14em;color:#1B1604;background:var(--gold);border-radius:20px;padding:5px 12px;font-weight:600}
+
+  .hero{padding:46px 0 30px;text-align:center}
+  .eyebrow{font-size:12px;letter-spacing:.24em;color:var(--gold-deep);text-transform:uppercase;margin-bottom:18px}
+  .hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(38px,8vw,68px);line-height:1.06;color:var(--cream);letter-spacing:.01em}
+  .hero h1 .or{color:var(--gold-light)}
+  .lead{color:var(--muted);font-size:clamp(15px,2.4vw,18px);max-width:560px;margin:20px auto 0}
+
+  .form-card{max-width:520px;margin:30px auto 0}
+  .field-row{display:flex;gap:10px;flex-wrap:wrap}
+  input[type=email],input[type=text]{flex:1;min-width:0;height:52px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0 16px;color:var(--cream);font-size:15px;font-family:var(--sans);outline:none;transition:border-color .2s}
+  input::placeholder{color:var(--hint)}
+  input:focus{border-color:var(--border-strong)}
+  .btn{height:52px;border:none;border-radius:10px;background:var(--gold);color:#1B1604;font-size:15px;font-weight:600;font-family:var(--sans);padding:0 24px;cursor:pointer;white-space:nowrap;transition:transform .1s,background .2s}
+  .btn:hover{background:var(--gold-light)}
+  .btn:active{transform:scale(.98)}
+  .btn-block{width:100%;margin-top:10px}
+  .consent{display:flex;align-items:flex-start;gap:9px;margin-top:14px;text-align:left;font-size:12.5px;color:var(--hint);line-height:1.5}
+  .consent input{margin-top:2px;accent-color:var(--gold)}
+  .formnote{font-size:12px;color:var(--hint);margin-top:10px}
+  .error{color:#E89B9B;font-size:13px;margin-top:10px;min-height:18px}
+
+  .counter{max-width:520px;margin:26px auto 0}
+  .counter .row{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:7px}
+  .counter .row .lab{color:var(--gold)}
+  .counter .row .pct{color:var(--muted)}
+  .bar{height:7px;background:#211d14;border-radius:7px;overflow:hidden}
+  .bar > i{display:block;height:100%;background:var(--gold);border-radius:7px}
+
+  section{padding:54px 0}
+  .sec-title{font-family:var(--serif);font-size:clamp(26px,5vw,40px);text-align:center;font-weight:500;color:var(--cream)}
+  .sec-sub{text-align:center;color:var(--muted);max-width:560px;margin:12px auto 0;font-size:15px}
+
+  .ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}
+  .tier{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 16px;display:flex;flex-direction:column}
+  .tier.best{border-color:var(--border-strong);background:var(--surface-2)}
+  .tier .tag{font-size:10px;letter-spacing:.1em;color:#1B1604;background:var(--gold);border-radius:10px;padding:3px 9px;align-self:flex-start;margin-bottom:10px;font-weight:600}
+  .tier h3{font-size:15px;letter-spacing:.07em;color:var(--gold-light);font-weight:600}
+  .tier .range{color:var(--hint);font-size:12px;margin:3px 0 14px}
+  .tier ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .tier li{display:flex;align-items:flex-start;gap:8px;font-size:13.5px;color:#E7E1D2;line-height:1.45}
+  .tier li svg{flex:none;margin-top:3px}
+  .tier.muted h3{color:var(--muted)}
+
+  .referral{display:flex;align-items:center;gap:13px;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 22px;margin-top:24px;text-align:center;flex-wrap:wrap}
+  .referral b{color:var(--gold-light);font-weight:600}
+
+  .values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+  .value{text-align:center;padding:8px}
+  .value .big{font-family:var(--serif);font-size:30px;color:var(--gold-light)}
+  .value p{color:var(--muted);font-size:14px;margin-top:6px}
+
+  footer{border-top:1px solid var(--border);padding:30px 0 50px;text-align:center}
+  footer p{color:var(--hint);font-size:12.5px;line-height:1.7;max-width:620px;margin:0 auto}
+  footer a{color:var(--muted)}
+
+  .success{display:none;max-width:520px;margin:30px auto 0;background:var(--surface);border:1px solid var(--border-strong);border-radius:14px;padding:26px 22px;text-align:center}
+  .success h3{font-family:var(--serif);font-size:26px;color:var(--gold-light);font-weight:500}
+  .success p{color:var(--muted);font-size:14.5px;margin-top:10px}
+  .ref-box{display:flex;gap:8px;margin-top:18px}
+  .ref-box input{flex:1;height:46px;font-size:13px;color:var(--gold-light)}
+  .ref-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  .chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);border-radius:24px;padding:9px 16px;font-size:13px;color:var(--cream);cursor:pointer;background:transparent}
+  .chip:hover{border-color:var(--border-strong)}
+
+  @media(max-width:880px){ .ladder{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:560px){
+    .ladder{grid-template-columns:1fr}
+    .values{grid-template-columns:1fr;gap:22px}
+    .field-row{flex-direction:column}
+    .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <span class="brand">AURIO</span>
+    <span class="pill">BIENTÔT DISPONIBLE</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="padding-top:30px">
+    <p class="eyebrow">Musique 100&nbsp;% générée par IA</p>
+    <h1>La musique d'une<br><span class="or">nouvelle ère.</span></h1>
+    <p class="lead">Des univers sonores générés par intelligence artificielle. Sans major, sans abonnement imposé. Rejoins les <b style="color:var(--cream)">Fondateurs</b> et façonne la plateforme avant tout le monde.</p>
+
+    <form id="waitlist" class="form-card" novalidate>
+      <div class="field-row">
+        <input type="text" name="prenom" placeholder="Prénom (optionnel)" autocomplete="given-name">
+        <input type="email" name="email" placeholder="ton@email.com" required autocomplete="email">
+      </div>
+      <button type="submit" class="btn btn-block">Rejoindre les Fondateurs</button>
+      <label class="consent">
+        <input type="checkbox" name="consent" required>
+        <span>J'accepte de recevoir des nouvelles d'AURIO par e-mail et la <a href="privacy.html" id="privacy-link">politique de confidentialité</a> (RGPD). Désinscription en un clic.</span>
+      </label>
+      <div class="error" id="formError" role="alert"></div>
+      <p class="formnote">Pas de spam. Juste l'accès anticipé et les avantages Fondateur.</p>
+    </form>
+
+    <div class="success" id="success">
+      <h3>Bienvenue parmi les Fondateurs.</h3>
+      <p>Ta place est réservée. Surveille ta boîte mail — et booste ton palier en partageant ton lien&nbsp;:</p>
+      <div class="ref-box">
+        <input type="text" id="refLink" readonly>
+        <button type="button" class="btn" id="copyBtn">Copier</button>
+      </div>
+      <div class="ref-actions">
+        <span class="chip" id="shareWa">Partager sur WhatsApp</span>
+        <span class="chip" id="shareX">Partager sur X</span>
+      </div>
+    </div>
+
+    <div class="counter" id="counterWrap">
+      <div class="row"><span class="lab" id="counterLabel"></span><span class="pct" id="counterPct"></span></div>
+      <div class="bar"><i id="counterBar"></i></div>
+    </div>
+  </section>
+
+  <section id="ladder">
+    <h2 class="sec-title">Les avantages Fondateur</h2>
+    <p class="sec-sub">Plus tu rejoins tôt, plus tes avantages sont grands. Et ils sont à vie.</p>
+
+    <div class="ladder">
+      <div class="tier best">
+        <span class="tag">LE MEILLEUR DEAL</span>
+        <h3>FONDATEURS</h3>
+        <div class="range">1 – 1 000 inscrits</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#D4AF37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>−50&nbsp;% à vie</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#D4AF37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>12 mois Premium offerts</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#D4AF37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>4 artistes IA au choix</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#D4AF37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Bêta privée + badge</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <h3>EARLY</h3>
+        <div class="range">1 001 – 10 000</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#D4AF37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>−35&nbsp;% à vie</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#D4AF37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>6 mois Premium</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#D4AF37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>2 artistes IA</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#D4AF37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Bêta privée</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <h3>INSIDERS</h3>
+        <div class="range">10 001 – 50 000</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#D4AF37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>−20&nbsp;% à vie</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#D4AF37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>3 mois Premium</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#D4AF37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>1 artiste IA</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#D4AF37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Accès prioritaire</li>
+        </ul>
+      </div>
+      <div class="tier muted">
+        <h3>WAITLIST</h3>
+        <div class="range">50 000 +</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#807A6C" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>1 mois Premium</li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3" stroke="#807A6C" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>File prioritaire</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="referral">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 12a3 3 0 100-6 3 3 0 000 6zM17 11a2.5 2.5 0 100-5M3 20a6 6 0 0112 0M15 20a6 6 0 00-3-5.2" stroke="#D4AF37" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span><b>Invite 3 amis</b> → tu remontes d'un palier. <b>10 amis</b> → tu sautes un palier complet.</span>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="values">
+      <div class="value"><div class="big">100%</div><p>de musique générée par IA</p></div>
+      <div class="value"><div class="big">0%</div><p>de major, 0 catalogue imposé</p></div>
+      <div class="value"><div class="big">∞</div><p>d'univers thématiques inédits</p></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>
+      <b style="color:var(--muted)">AURIO</b> · Musique 100&nbsp;% générée par intelligence artificielle.<br>
+      En t'inscrivant, tu acceptes notre <a href="privacy.html" id="privacy-link-2">politique de confidentialité</a> (RGPD). © 2026 AURIO.
+    </p>
+  </div>
+</footer>
+
+<script>
+  /* ====================== CONFIG ====================== */
+  const CONFIG = {
+    formspreeId: "REPLACE_ME",   // <-- ton ID Formspree (ex: "xpzgkabc")
+    tierName: "Fondateur",
+    signups: 312,                // mets ton chiffre réel (ou branche-le sur ton API plus tard)
+    tierCap: 1000,
+    siteUrl: location.origin + location.pathname
+  };
+  /* OPTION BREVO : remplace la fonction submitLead() ci-dessous par l'intégration
+     du formulaire embarqué Brevo (sibforms), ou connecte Formspree -> Brevo via une
+     automation. Brevo ne permet pas d'envoyer la clé API côté client (sécurité). */
+  /* =================================================== */
+
+  const form = document.getElementById('waitlist');
+  const errorEl = document.getElementById('formError');
+  const successEl = document.getElementById('success');
+
+  function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  function makeRefCode(){
+    let s = localStorage.getItem('aurio_ref');
+    if(!s){ s = Math.random().toString(36).slice(2,8).toUpperCase(); localStorage.setItem('aurio_ref', s); }
+    return s;
+  }
+
+  async function submitLead(data){
+    const id = CONFIG.formspreeId;
+    if(!id || id === "REPLACE_ME"){
+      console.warn("[AURIO] Mode démo : configure CONFIG.formspreeId pour collecter réellement les e-mails.");
+      return true; // succès simulé pour la prévisualisation
+    }
+    const res = await fetch("https://formspree.io/f/" + id, {
+      method: "POST",
+      body: data,
+      headers: { "Accept": "application/json" }
+    });
+    return res.ok;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorEl.textContent = "";
+    const email = form.email.value.trim();
+    if(!isEmail(email)){ errorEl.textContent = "Entre une adresse e-mail valide."; return; }
+    if(!form.consent.checked){ errorEl.textContent = "Merci de cocher le consentement (RGPD)."; return; }
+
+    const btn = form.querySelector('button');
+    btn.disabled = true; btn.textContent = "…";
+
+    const ref = makeRefCode();
+    const data = new FormData(form);
+    data.append("referral_code", ref);
+    data.append("tier", CONFIG.tierName);
+
+    try{
+      const ok = await submitLead(data);
+      if(!ok) throw new Error("submit failed");
+      localStorage.setItem('aurio_joined','1');
+      showSuccess(ref);
+    }catch(err){
+      errorEl.textContent = "Oups, une erreur est survenue. Réessaie dans un instant.";
+      btn.disabled = false; btn.textContent = "Rejoindre les Fondateurs";
+    }
+  });
+
+  function showSuccess(ref){
+    form.style.display = "none";
+    document.getElementById('counterWrap').style.display = "none";
+    successEl.style.display = "block";
+    const link = CONFIG.siteUrl + "?ref=" + ref;
+    document.getElementById('refLink').value = link;
+    const msg = encodeURIComponent("Je viens de rejoindre les Fondateurs d'AURIO — la 1ʳᵉ plateforme de musique 100% IA. Rejoins-moi : " + link);
+    document.getElementById('shareWa').onclick = () => window.open("https://wa.me/?text=" + msg, "_blank");
+    document.getElementById('shareX').onclick = () => window.open("https://twitter.com/intent/tweet?text=" + msg, "_blank");
+    document.getElementById('copyBtn').onclick = async () => {
+      try{ await navigator.clipboard.writeText(link); document.getElementById('copyBtn').textContent = "Copié ✓"; }
+      catch(e){ const i = document.getElementById('refLink'); i.select(); document.execCommand('copy'); }
+    };
+    successEl.scrollIntoView({behavior:"smooth", block:"center"});
+  }
+
+  /* compteur de rareté */
+  (function initCounter(){
+    const pct = Math.min(100, Math.round(CONFIG.signups / CONFIG.tierCap * 100));
+    document.getElementById('counterLabel').textContent =
+      "Palier " + CONFIG.tierName + " — " + CONFIG.signups.toLocaleString('fr-FR') + " / " + CONFIG.tierCap.toLocaleString('fr-FR') + " places prises";
+    document.getElementById('counterPct').textContent = pct + " %";
+    document.getElementById('counterBar').style.width = pct + "%";
+  })();
+
+  /* si déjà inscrit sur cet appareil, on remontre l'état succès */
+  if(localStorage.getItem('aurio_joined') === '1'){ showSuccess(makeRefCode()); }
+</script>
+</body>
+</html>
