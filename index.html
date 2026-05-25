@@ -248,7 +248,10 @@
   const CONFIG = Object.assign({
     formspreeId: "REPLACE_ME",   // démo tant qu'aucune valeur n'est injectée
     tierName: "Fondateur",
-    signups: 312,                // mets ton chiffre réel (ou branche-le sur ton API plus tard)
+    // --- compteur dynamique : base + croissance déterministe selon la date ---
+    startCount: 112,             // nombre affiché au lancement
+    startDate: "2026-05-25",     // date de départ du compteur (YYYY-MM-DD)
+    perDay: 7,                   // inscrits "ajoutés" par jour en moyenne (ajuste à ta sauce)
     tierCap: 1000,
     siteUrl: location.origin + location.pathname
   }, window.AURIO_CONFIG || {});
@@ -261,7 +264,11 @@
   const errorEl = document.getElementById('formError');
   const successEl = document.getElementById('success');
 
-  function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  // validation e-mail stricte : rejette les caractères farfelus (#, espaces, doublons @…)
+  // et exige un domaine + TLD d'au moins 2 lettres.
+  function isEmail(v){
+    return /^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z]{2,})+$/.test(v);
+  }
 
   function makeRefCode(){
     let s = localStorage.getItem('aurio_ref');
@@ -286,8 +293,9 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorEl.textContent = "";
-    const email = form.email.value.trim();
-    if(!isEmail(email)){ errorEl.textContent = "Entre une adresse e-mail valide."; return; }
+    const email = form.email.value.trim().toLowerCase();
+    form.email.value = email;
+    if(!isEmail(email)){ errorEl.textContent = "Entre une adresse e-mail valide (ex. prenom@gmail.com)."; return; }
     if(!form.consent.checked){ errorEl.textContent = "Merci de cocher le consentement (RGPD)."; return; }
 
     const btn = form.querySelector('button');
@@ -325,11 +333,21 @@
     successEl.scrollIntoView({behavior:"smooth", block:"center"});
   }
 
-  /* compteur de rareté */
+  /* compteur de rareté — DYNAMIQUE : base startCount + croissance déterministe par jour.
+     NB : c'est un compteur d'AFFICHAGE (effet de rareté), pas le vrai total Formspree.
+     Pour un compteur réel il faut un petit backend / une API de compteur. */
+  function currentSignups(){
+    const start = new Date(CONFIG.startDate + "T00:00:00");
+    const days = Math.max(0, Math.floor((Date.now() - start.getTime()) / 86400000));
+    let n = CONFIG.startCount + days * CONFIG.perDay;        // jour 0 = startCount pile, +perDay par jour
+    if(localStorage.getItem('aurio_joined') === '1') n += 1; // +1 si tu t'es inscrit sur cet appareil
+    return Math.min(CONFIG.tierCap, n);
+  }
   (function initCounter(){
-    const pct = Math.min(100, Math.round(CONFIG.signups / CONFIG.tierCap * 100));
+    const signups = currentSignups();
+    const pct = Math.min(100, Math.round(signups / CONFIG.tierCap * 100));
     document.getElementById('counterLabel').textContent =
-      "Palier " + CONFIG.tierName + " — " + CONFIG.signups.toLocaleString('fr-FR') + " / " + CONFIG.tierCap.toLocaleString('fr-FR') + " places prises";
+      "Palier " + CONFIG.tierName + " — " + signups.toLocaleString('fr-FR') + " / " + CONFIG.tierCap.toLocaleString('fr-FR') + " places prises";
     document.getElementById('counterPct').textContent = pct + " %";
     document.getElementById('counterBar').style.width = pct + "%";
   })();
