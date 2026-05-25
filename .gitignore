@@ -5,3 +5,6 @@
 *.xlsx
 *.pdf
 .DS_Store
+
+# Config injectée au déploiement (jamais committée)
+config.js

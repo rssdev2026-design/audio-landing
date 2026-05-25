@@ -1,0 +1,45 @@
+name: Deploy AURIO landing to GitHub Pages
+
+# Déploie le site et injecte la config (ID Formspree) depuis une variable de repo.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # bouton "Run workflow" manuel
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Génère config.js à partir de la variable de repo FORMSPREE_ID
+      # (Settings > Secrets and variables > Actions > onglet "Variables").
+      - name: Generate config.js
+        run: |
+          echo "window.AURIO_CONFIG = { formspreeId: \"${{ vars.FORMSPREE_ID }}\" };" > config.js
+          echo "config.js généré."
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

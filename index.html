@@ -20,7 +20,8 @@
 <meta property="og:title" content="AURIO — La musique en or, générée par IA">
 <meta property="og:description" content="100% IA, 0% major. Rejoins les Fondateurs et débloque des avantages à vie.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="og-cover.jpg">
+<meta property="og:url" content="https://rssdev2026-design.github.io/audio-landing/">
+<meta property="og:image" content="https://rssdev2026-design.github.io/audio-landing/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -237,15 +238,19 @@
   </div>
 </footer>
 
+<!-- config.js est GÉNÉRÉ au déploiement (GitHub Actions) depuis la variable de repo FORMSPREE_ID.
+     Il n'est jamais committé (voir .gitignore). Absent en local => la page tourne en mode démo. -->
+<script src="config.js"></script>
 <script>
   /* ====================== CONFIG ====================== */
-  const CONFIG = {
-    formspreeId: "REPLACE_ME",   // <-- ton ID Formspree (ex: "xpzgkabc")
+  /* Valeurs par défaut, surchargées par window.AURIO_CONFIG (config.js) si présent. */
+  const CONFIG = Object.assign({
+    formspreeId: "REPLACE_ME",   // démo tant qu'aucune valeur n'est injectée
     tierName: "Fondateur",
     signups: 312,                // mets ton chiffre réel (ou branche-le sur ton API plus tard)
     tierCap: 1000,
     siteUrl: location.origin + location.pathname
-  };
+  }, window.AURIO_CONFIG || {});
   /* OPTION BREVO : remplace la fonction submitLead() ci-dessous par l'intégration
      du formulaire embarqué Brevo (sibforms), ou connecte Formspree -> Brevo via une
      automation. Brevo ne permet pas d'envoyer la clé API côté client (sécurité). */
